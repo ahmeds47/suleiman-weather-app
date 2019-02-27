@@ -36,17 +36,35 @@ getWeather = async (e) => {
   
   const response = await api_call.json();
   
-  this.setState({
-    //the temperature should be a whole number.
-    //"\xB0 Celsius" is for the Celsius symbol.
-    temperature: Math.round(response.main.temp) + "\xB0 Celsius",
-    city: response.name,
-    country: response.sys.country,
-    humidity: response.main.humidity,
-    description: response.weather[0].description,
-    error: ""
-  })
-  
+  //check if the correct data is returned
+  //set the error param with the message from the response 
+  //and set the states of the other params to nothing.
+  if(response.cod === '404')
+  {
+    this.setState({
+      error: response.message,
+      temperature: "",
+      city: "",
+      country: "",
+      humidity: "",
+      description: ""
+    })
+  }
+  else
+  {
+    //set all params with the correct values
+    //and set error to nothing
+    this.setState({
+      //the temperature should be a whole number.
+      //"\xB0 Celsius" is for the Celsius symbol.
+      temperature: Math.round(response.main.temp) + "\xB0 Celsius",
+      city: response.name,
+      country: response.sys.country,
+      humidity: response.main.humidity,
+      description: response.weather[0].description,
+      error: ""
+    })
+  }
 }
    render(){
     return(
