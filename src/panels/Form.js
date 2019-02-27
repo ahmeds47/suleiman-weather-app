@@ -1,5 +1,5 @@
 import React from "react";
-import Geocode from "react-geocode";
+//import Geocode from "react-geocode";
 
 class Form extends React.Component{
   
@@ -20,33 +20,6 @@ class Form extends React.Component{
       this.setState({
           [name] : value
       });
-  }
-
-  showPosition(position) {
-    //var lat = position.coords.latitude;
-    //var lon =  position.coords.longitude;
-
-    //console.log(position.coords);
-  }
-
-  loadCurrentLoc(){
-    Geocode.setApiKey("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-
-    Geocode.enableDebug();
-
-    Geocode.fromLatLng("48.8583701", "2.2922926").then(
-      response => {
-        const address = response.results[0].formatted_address;
-        console.log(address);
-      },
-      error => {
-        console.error(error);
-      }
-    );
-  }
-
-  componentDidMount(){
-    //this.loadCurrentLoc();
   }
 
     render(){
