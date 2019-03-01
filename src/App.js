@@ -21,21 +21,11 @@ class App extends React.Component{
 
   setWeatherData(response)
   {
+    console.log(response.cod);
     //check if the correct data is returned
     //set the error param with the message from the response 
     //and set the states of the other params to nothing.
-    if(response.cod === '404')
-    {
-      this.setState({
-        error: response.message,
-        temperature: "",
-        city: "",
-        country: "",
-        humidity: "",
-        description: ""
-      })
-    }
-    else
+    if(response.cod === 200)
     {
       //set all params with the correct values
       //and set error to nothing
@@ -50,13 +40,23 @@ class App extends React.Component{
         error: ""
       })
     }
+    else{
+      this.setState({
+        error: response.message,
+        temperature: "",
+        city: "",
+        country: "",
+        humidity: "",
+        description: ""
+      })
+    }
   }
 
   getCurrentLocation = async (e) => {
   //ip lookup to get current location
     const ipLookUp = await fetch('http://ip-api.com/json');
     const lookUpResponse = await ipLookUp.json();
-
+ console.log(lookUpResponse);
     this.loadWeatherData(lookUpResponse.city, lookUpResponse.country);
   }
 
